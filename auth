@@ -1,0 +1,28 @@
+import requests
+import json
+
+# Replace with your Redis Enterprise API URL and API token
+api_url = "https://your-redis-enterprise-api-url/v1/users"
+api_token = "YOUR_API_TOKEN"
+
+# User details
+user_data = {
+    "username": "new_user",
+    "password": "password123"
+}
+
+# Define headers with the API token
+headers = {
+    "Authorization": f"Bearer {api_token}",
+    "Content-Type": "application/json"
+}
+
+# Send a POST request to create the new user
+response = requests.post(api_url, data=json.dumps(user_data), headers=headers)
+
+# Check the response
+if response.status_code == 201:
+    print("User created successfully.")
+else:
+    print(f"Error creating user. Status code: {response.status_code}")
+    print(response.text)
